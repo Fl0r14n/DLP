@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Available Forms</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        {% if forms %}
+        <form action="/survey/submit/" method="GET">
+            <table border="1">
+                <caption><h1>Available forms</h1></caption>
+                <tr>
+                    <th>Creation Date</th>
+                    <th>Form Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+                {% for form in forms %}
+                <tr>                
+                    <td><strong>{{form.name}}</strong></td>
+                    <td>{{form.description}}</td>
+                    <td>{{form.creation_date}}</td>
+                    <td>
+                        <input type="submit" value="Fill form" formaction="{{form.pk}}"/>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+        {% else %}
+        <h1>No forms found</h1>    
+        {% endif %}        
+    </body>
+</html>

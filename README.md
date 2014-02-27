@@ -1,4 +1,4 @@
 DLP
 ===
 
-DLP
+Django learning program

@@ -34,3 +34,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#netbeans
+/nbproject
+
+#test db
+db.sqlite3

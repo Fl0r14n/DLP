@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fill form {{form.name}}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        {% if form %}
+        <h1>{{form.name}}</h1>
+        <h2>{{form.description}}</h2>
+        <ul>
+            {% for section , questions in form.sections.iteritems %}
+            <li>
+                <h3>{{section}}</h3>   
+                {%for question in questions%}
+                <h4>Q{{question.number}}: {{question.name}}</h4>
+                
+                {% for answer in question.answers %}                
+                <label>A{{forloop.counter}}: {{answer.0}}</label>
+                <input type="checkbox" value="{{answer.1}}">
+                {%endfor%}
+                
+                {%endfor%}
+            </li>                                      
+            {% endfor %}
+        </ul>   
+        {% else %}
+        <h1>Form not found</h1>    
+        {% endif %}   
+    </body>
+</html>
