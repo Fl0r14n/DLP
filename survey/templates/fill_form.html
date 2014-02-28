@@ -7,26 +7,33 @@
     </head>
     <body>
         {% if form %}
-        <h1>{{form.name}}</h1>
-        <h2>{{form.description}}</h2>
-        <ul>
-            {% for section , questions in form.sections.iteritems %}
-            <li>
-                <h3>{{section}}</h3>   
-                {%for question in questions%}
-                <h4>Q{{question.number}}: {{question.name}}</h4>
-                
-                {% for answer in question.answers %}                
-                <label>A{{forloop.counter}}: {{answer.0}}</label>
-                <input type="checkbox" value="{{answer.1}}">
-                {%endfor%}
-                
-                {%endfor%}
-            </li>                                      
-            {% endfor %}
-        </ul>   
-        {% else %}
-        <h1>Form not found</h1>    
+        <form method="POST">
+            {% csrf_token %}
+            <h1>{{form.name}}</h1>
+            <h2>{{form.description}}</h2>
+            <ul>
+                {% for section , questions in form.sections.iteritems %}
+                <li>
+                    <h3>Section {{section}}</h3>   
+                    {%for question in questions%}
+                    <h4>Q{{question.number}}: {{question.name}}</h4>
+
+                    {% for answer in question.answers %}                
+                    <label>A{{forloop.counter}}: {{answer.0}}</label>
+                    <input type="checkbox" name="c_{{section}}_{{question.number}}" value="{{answer.1}}"/>                    
+                    {%endfor%}
+
+                    {%endfor%}
+                </li>                                      
+                {% endfor %}
+            </ul>
+            <input type="hidden" name="max_score" value="{{form.max_score}}"/>
+            <label><strong>Name:</strong> (optional)</label>
+            <input type="text" name="name"/>            
+            <input type="submit" value="Submit form"/>
+            {% else %}
+            <h1>Form not found</h1>
+        </form>
         {% endif %}   
     </body>
 </html>

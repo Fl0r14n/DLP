@@ -65,6 +65,7 @@ class Result(models.Model):
     participant = models.CharField(max_length=64, blank=True)    
     score = models.SmallIntegerField(blank=True)
     threshold = models.SmallIntegerField(blank=True)
+    fill_date = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
         return to_string(self)

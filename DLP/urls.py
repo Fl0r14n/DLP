@@ -17,7 +17,6 @@ urlpatterns += patterns('',
     url(r'^$', sv.root),
     url(r'^survey/$', sv.root),
     url(r'^survey/forms/$', sv.show_forms),
-    url(r'^survey/forms/(\d+)/$', sv.fill_form),
-    url(r'^survey/submit/$', sv.submit_form),
+    url(r'^survey/forms/(\d+)/$', sv.fill_form),    
     url(r'^survey/results/$', sv.show_results),
 )
