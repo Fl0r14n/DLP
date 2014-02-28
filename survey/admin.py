@@ -17,7 +17,7 @@ class AdminAnswer(admin.ModelAdmin):
     list_display = ('question_name', 'score', 'text',)
 
 class AdminResult(admin.ModelAdmin):
-    list_display = ('form_name', 'participant', 'threshold', 'score',)
+    list_display = ('form_name', 'participant', 'fill_date', 'target_score', 'score', 'score',)
 
 from survey.models import *
 admin.site.register(Form, AdminForm)

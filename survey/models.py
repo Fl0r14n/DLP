@@ -63,9 +63,9 @@ class Answer(models.Model):
 class Result(models.Model):
     form = models.ForeignKey(Form, blank=True, null=True, on_delete=models.SET_NULL)
     participant = models.CharField(max_length=64, blank=True)    
-    score = models.SmallIntegerField(blank=True)
-    threshold = models.SmallIntegerField(blank=True)
     fill_date = models.DateTimeField(auto_now_add=True)
+    target_score = models.SmallIntegerField(blank=True)
+    score = models.SmallIntegerField(blank=True)    
     
     def __unicode__(self):
         return to_string(self)

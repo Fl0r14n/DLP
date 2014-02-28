@@ -6,6 +6,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        {%if results%}
+        <table border="1">
+            <caption><h1>Results</h1></caption>
+            <tr>
+                <th>Form name</th>
+                <th>Participant</th>
+                <th>Fill Date</th>
+                <th>Score</th>
+                <th>Target Score</th>
+            </tr>
+            {%for result in results%}
+                <tr>
+                    <td>{{result.form_name}}</td>
+                    <td>{{result.participant}}</td>
+                    <td>{{result.fill_date}}</td>
+                    <td>{{result.score}}</td>
+                    <td>{{result.target_score}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+        {%else%}
+        <h1>No results found</h1>
+        {%endif%}
+        <form method="GET">
+            <input type="Submit" value="Back" formaction="../"/>
+        </form>
     </body>
 </html>

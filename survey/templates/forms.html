@@ -7,14 +7,15 @@
     </head>
     <body>
         {% if forms %}
-        <form action="/survey/submit/" method="GET">
+        <form method="GET">
             <table border="1">
                 <caption><h1>Available forms</h1></caption>
                 <tr>
-                    <th>Creation Date</th>
                     <th>Form Name</th>
                     <th>Description</th>
+                    <th>Creation Date</th>                                        
                     <th></th>
+                    <th><input type="submit" value="All" formaction="result/"/></th>
                 </tr>
                 {% for form in forms %}
                 <tr>                
@@ -22,7 +23,10 @@
                     <td>{{form.description}}</td>
                     <td>{{form.creation_date}}</td>
                     <td>
-                        <input type="submit" value="Fill form" formaction="{{form.pk}}"/>
+                        <input type="submit" value="Fill form" formaction="form/{{form.pk}}"/>
+                    </td>
+                    <td>
+                        <input type="submit" value="Results" formaction="result/{{form.pk}}"/>
                     </td>
                 </tr>
                 {% endfor %}

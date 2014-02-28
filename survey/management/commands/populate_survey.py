@@ -19,8 +19,7 @@ class Command(BaseCommand):
         max_value_per_answer = max_answers_per_question
 
         def _clean_db():
-            Form.objects.all().delete()
-            Question.objects.all().delete()
+            Form.objects.all().delete()            
 
         def _create_forms():
             for i in range(random.randint(min_forms,max_forms)):

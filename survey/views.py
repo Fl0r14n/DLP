@@ -3,12 +3,12 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from survey import models as sm
 
-def root(request):
-    return HttpResponseRedirect('/survey/forms/')
+def home(request):
+    return HttpResponseRedirect('survey/')
 
 def show_forms(request):
     forms = sm.Form.objects.all()
-    return render(request,'show_forms.html',{'forms': forms})    
+    return render(request,'forms.html',{'forms': forms})    
 
 def fill_form(request, form_id):
     max_score = [0]    
@@ -48,20 +48,23 @@ def fill_form(request, form_id):
         return result
         
     if request.method != 'POST':    
-        return render(request, 'fill_form.html', {'form':get_form()})
+        return render(request, 'form.html', {'form':get_form()})
     else:
-        name = request.POST.get('name')
-        desired = request.POST.get('max_score', 0)
         score = 0
         for val in request.POST:
             if val.startswith('c_'):
                 score += int(request.POST[val])
-        #print score        
-        return render(request, 'show_result.html', {
-            'score': score,
-            'max_score': desired,
-            'name': name
-        })
+        result = sm.Result.objects.create(
+            form = sm.Form.objects.get(pk=form_id), 
+            participant = request.POST.get('name', ''),
+            target_score = request.POST.get('max_score', 0),
+            score = score,            
+        )         
+        return render(request, 'result.html', {'result': result})
 
-def show_results(request):
-    pass
+def show_results(request, form_id):
+    if form_id:
+        results = sm.Result.objects.filter(form_id=form_id)
+    else:    
+        results = sm.Result.objects.all();
+    return render(request, 'results.html', {'results': results})

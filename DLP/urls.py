@@ -14,9 +14,8 @@ urlpatterns = patterns('',
 from survey import views as sv
 
 urlpatterns += patterns('',
-    url(r'^$', sv.root),
-    url(r'^survey/$', sv.root),
-    url(r'^survey/forms/$', sv.show_forms),
-    url(r'^survey/forms/(\d+)/$', sv.fill_form),    
-    url(r'^survey/results/$', sv.show_results),
+    url(r'^$', sv.home),
+    url(r'^survey/$', sv.show_forms),
+    url(r'^survey/form/(\d+)/$', sv.fill_form),    
+    url(r'^survey/result/(?P<form_id>(\d+))?/?$', sv.show_results),
 )
